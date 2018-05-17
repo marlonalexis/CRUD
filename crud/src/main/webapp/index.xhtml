@@ -3,6 +3,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:pe="http://primefaces.org/ui/extensions"
       xmlns:p="http://primefaces.org/ui">
 
     <f:view contentType="text/html">
@@ -14,38 +15,47 @@
         </h:head>
 
         <h:body>
-
-            <p:layout fullPage="true">
-
-                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
-                    Header
-                </p:layoutUnit>
-
-                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
-                    Footer
-                </p:layoutUnit>
-
-                <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
-                    <p:menu>
-                        <p:submenu label="Resources">
-                            <p:menuitem value="Demo" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
-                            <p:menuitem value="Documentation" url="http://www.primefaces.org/documentation.html" />
-                            <p:menuitem value="Forum" url="http://forum.primefaces.org/" />
-                            <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
-
-                        </p:submenu>
-
-                    </p:menu>
-                </p:layoutUnit>
-
-                <p:layoutUnit position="center">
-                    Welcome to PrimeFaces
-                </p:layoutUnit>
-
-            </p:layout>
-
+            <h1>CRUD by Marlon Pluas</h1>
+            <p:panel header="Vehiculos | Administracion vehiculos" id="panelMantenimientoMascotas">
+                <h:form id="form" enctype="multipart/form-data">
+                    <p:panel id="papGestion" closable="false"  rendered="#{vehiculosController.listaInformacionVehiculo}">
+                        <p:dataTable var="car" value="#{vehiculosController.listaVehiculos}" reflow="true" rows="5" paginator="true">
+                            <p:column headerText="Id">
+                                <h:outputText value="#{car.idVehiculo}" />
+                            </p:column>
+                            <p:column headerText="Modelo">
+                                <h:outputText value="#{car.modelo}" />
+                            </p:column>
+                            <p:column headerText="Marca">
+                                <h:outputText value="#{car.idMarca.descripcion}" />
+                            </p:column>
+                            <p:column headerText="Precio">
+                                <h:outputText value="#{car.precio}" />
+                            </p:column>
+                            <p:column headerText="Año">
+                                <h:outputText value="#{car.anio}" />
+                            </p:column>
+                            <p:column headerText="Fecha Registro">
+                                <h:outputText value="#{car.fechaRegistro}" />
+                            </p:column>
+                            <p:column headerText="Opciones">
+                                <p:commandButton icon="ui-icon-pencil" update="@form" title="Editar"
+                                                 actionListener="#{vehiculosController.vehiculoSeleccionadoEdicion}"
+                                                 process="@this">
+                                    <f:attribute name="vehiculo" value="#{car}" />
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+                    <!-- Inicio Crear !-->
+                    <p:panel closable="false" id="panelNuevoVehiculo" rendered="#{mascotasController.nuevaMascota}">
+                    
+                    </p:panel>
+                </h:form>
+            </p:panel>
+            
         </h:body>
-
+        
     </f:view>
+    
 </html>
-
